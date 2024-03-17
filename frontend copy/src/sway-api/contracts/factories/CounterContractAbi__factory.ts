@@ -23,6 +23,12 @@ const _abi = {
     },
     {
       "typeId": 1,
+      "type": "str",
+      "components": null,
+      "typeParameters": null
+    },
+    {
+      "typeId": 2,
       "type": "u64",
       "components": null,
       "typeParameters": null
@@ -34,7 +40,7 @@ const _abi = {
       "name": "count",
       "output": {
         "name": "",
-        "type": 1,
+        "type": 2,
         "typeArguments": null
       },
       "attributes": [
@@ -42,6 +48,24 @@ const _abi = {
           "name": "storage",
           "arguments": [
             "read"
+          ]
+        }
+      ]
+    },
+    {
+      "inputs": [],
+      "name": "decrement",
+      "output": {
+        "name": "",
+        "type": 0,
+        "typeArguments": null
+      },
+      "attributes": [
+        {
+          "name": "storage",
+          "arguments": [
+            "read",
+            "write"
           ]
         }
       ]
@@ -63,12 +87,69 @@ const _abi = {
           ]
         }
       ]
+    },
+    {
+      "inputs": [
+        {
+          "name": "by",
+          "type": 2,
+          "typeArguments": null
+        }
+      ],
+      "name": "multiply",
+      "output": {
+        "name": "",
+        "type": 0,
+        "typeArguments": null
+      },
+      "attributes": [
+        {
+          "name": "storage",
+          "arguments": [
+            "read",
+            "write"
+          ]
+        }
+      ]
+    },
+    {
+      "inputs": [
+        {
+          "name": "to",
+          "type": 2,
+          "typeArguments": null
+        }
+      ],
+      "name": "reset",
+      "output": {
+        "name": "",
+        "type": 0,
+        "typeArguments": null
+      },
+      "attributes": [
+        {
+          "name": "storage",
+          "arguments": [
+            "read",
+            "write"
+          ]
+        }
+      ]
     }
   ],
-  "loggedTypes": [],
+  "loggedTypes": [
+    {
+      "logId": 0,
+      "loggedType": {
+        "name": "",
+        "type": 1,
+        "typeArguments": null
+      }
+    }
+  ],
   "messagesTypes": [],
   "configurables": []
-};
+}
 
 const _storageSlots: StorageSlot[] = [
   {

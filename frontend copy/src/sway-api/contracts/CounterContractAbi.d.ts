@@ -24,13 +24,25 @@ interface CounterContractAbiInterface extends Interface {
   functions: {
     count: FunctionFragment;
     increment: FunctionFragment;
+    increment_twice: FunctionFragment;
+    decrement: FunctionFragment;
+    multiply: FunctionFragment;
+    reset: FunctionFragment;
   };
 
   encodeFunctionData(functionFragment: 'count', values: []): Uint8Array;
   encodeFunctionData(functionFragment: 'increment', values: []): Uint8Array;
+  encodeFunctionData(functionFragment: 'decrement', values: []): Uint8Array;
+  encodeFunctionData(functionFragment: 'multiply', values: [number]): Uint8Array;  
+  encodeFunctionData(functionFragment: 'reset', values: [number]): Uint8Array;
+
 
   decodeFunctionData(functionFragment: 'count', data: BytesLike): DecodedValue;
   decodeFunctionData(functionFragment: 'increment', data: BytesLike): DecodedValue;
+  decodeFunctionData(functionFragment: 'decrement', data: BytesLike): DecodedValue;
+  decodeFunctionData(functionFragment: 'multiply', data: BytesLike): DecodedValue; 
+  decodeFunctionData(functionFragment: 'reset', data: BytesLike): DecodedValue; 
+
 }
 
 export class CounterContractAbi extends Contract {
@@ -38,5 +50,9 @@ export class CounterContractAbi extends Contract {
   functions: {
     count: InvokeFunction<[], BN>;
     increment: InvokeFunction<[], void>;
+    decrement: InvokeFunction<[], void>;
+    multiply: InvokeFunction<[BigNumberish], void>; // Added 'multiply' with corrected type
+    reset: InvokeFunction<[BigNumberish], void>; // Add this line
+  
   };
 }
