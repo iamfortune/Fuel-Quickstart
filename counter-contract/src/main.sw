@@ -19,8 +19,6 @@ abi Counter {
     #[storage(read, write)]
     fn reset(to: u64); 
 
-    // #[storage(read, write)]
-    // fn exponential(by: u64);
 }
 
 
