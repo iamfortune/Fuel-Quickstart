@@ -18,7 +18,7 @@ export default function Home() {
   const [counter, setCounter] = useState<number>(); // State to hold the general value
   const [multiplyValue, setMultiplyValue] = useState<number>(1); // State to hold the multiply value
   const [feedbackMessage, setFeedbackMessage] = useState(""); // for the feedback message
-  const [success, setSuccess] = useState(true)
+  const [success, setSuccess] = useState(true);
   const [isTransactionProcessing, setIsTransactionProcessing] = useState(false); // for transaction processing
   const { connect, setTheme, isConnecting } = useConnectUI();
   const { disconnect } = useDisconnect(); // To disconnect wallet button 
@@ -58,7 +58,7 @@ export default function Home() {
 
   const onIncrementPressed = async () => {
     if (!contract) {
-      setSuccess(false)
+      setSuccess(false);
       return setFeedbackMessage("Contract not loaded");
     }
     try {
@@ -68,9 +68,10 @@ export default function Home() {
         .txParams({ gasPrice: 1, gasLimit: 100_000 })
         .call();
       await getCount(contract);
+      setSuccess(true);
       setFeedbackMessage("Counter incremented successfully!");
     } catch (error) {
-      setSuccess(false)
+      setSuccess(false);
       setFeedbackMessage("Increment operation failed.");
     } finally {
       setIsTransactionProcessing(false);
@@ -81,7 +82,7 @@ export default function Home() {
 
   const handleDecrement = async () => {
     if (!contract) {
-      setSuccess(false)
+      setSuccess(false);
       return setFeedbackMessage("Contract not loaded");
     }
     try {
@@ -91,9 +92,10 @@ export default function Home() {
         .txParams({ gasPrice: 1, gasLimit: 100_000 })
         .call();
       await getCount(contract);
+      setSuccess(true);
       setFeedbackMessage("Counter decremented successfully!");
     } catch (error) {
-      setSuccess(false)
+      setSuccess(false);
       let errorMessage = "Counter cannot be decremented below 0.";
       setFeedbackMessage(errorMessage);
     } finally {
@@ -105,7 +107,7 @@ export default function Home() {
 
   const handleMultiply = async () => {
     if (!contract || !multiplyValue) {
-      setSuccess(false)
+      setSuccess(false);
       return setFeedbackMessage(
         "Contract not loaded or multiply value is invalid"
       );
@@ -118,6 +120,7 @@ export default function Home() {
         .txParams({ gasPrice: 1, gasLimit: 100_000 })
         .call();
       await getCount(contract);
+      setSuccess(true);
       setFeedbackMessage("Counter multiplied successfully!");
     } catch (error) {
       setSuccess(false)
@@ -142,6 +145,7 @@ export default function Home() {
         .txParams({ gasPrice: 1, gasLimit: 100_000 })
         .call();
       await getCount(contract);
+      setSuccess(true);
       setFeedbackMessage("Counter reset successful!");
     } catch (error) {
       setSuccess(false)
