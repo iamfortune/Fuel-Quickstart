@@ -113,13 +113,7 @@ const _abi = {
       ]
     },
     {
-      "inputs": [
-        {
-          "name": "to",
-          "type": 2,
-          "typeArguments": null
-        }
-      ],
+      "inputs": [],
       "name": "reset",
       "output": {
         "name": "",

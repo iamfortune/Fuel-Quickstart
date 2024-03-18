@@ -34,7 +34,7 @@ interface CounterContractAbiInterface extends Interface {
   encodeFunctionData(functionFragment: 'increment', values: []): Uint8Array;
   encodeFunctionData(functionFragment: 'decrement', values: []): Uint8Array;
   encodeFunctionData(functionFragment: 'multiply', values: [number]): Uint8Array;  
-  encodeFunctionData(functionFragment: 'reset', values: [number]): Uint8Array;
+  encodeFunctionData(functionFragment: 'reset', values: []): Uint8Array;
 
 
   decodeFunctionData(functionFragment: 'count', data: BytesLike): DecodedValue;
@@ -52,7 +52,7 @@ export class CounterContractAbi extends Contract {
     increment: InvokeFunction<[], void>;
     decrement: InvokeFunction<[], void>;
     multiply: InvokeFunction<[BigNumberish], void>; // Added 'multiply' with corrected type
-    reset: InvokeFunction<[BigNumberish], void>; // Add this line
+    reset: InvokeFunction<[], void>; // Add this line
   
   };
 }

@@ -230,7 +230,7 @@ The Count function reads the current value of the  counter variable from storage
 The Increment function increases the value of the Counter variable by 1, it is a `read` and`write` method and alters the state of the smart contract.
 The Decrement function is a `read` and `write` which decreases the current value of the Counter variable by 1. Similar to the Increment function, it modifies the state of the smart contract.
 The Multiply function takes one arguments called `by` which is the multiplier and returns the product of the current value of the Counter and the multiplier. 
-The Reset function sets the counter back to zero by writing 
+The Reset function sets the counter back to 0.
 
 ### Implement ABI
 
@@ -240,12 +240,12 @@ Below your ABI definition, you will write the implementation of the functions de
 id="impl"
 action={{
   name: 'modifyFile',
-  filepath: 'guides-testing/fuel-project/counter-contract/src/main.sw'
+  filepath: '/fuel quickstart/counter-contract/src/main.sw'
 }}
 />
 
 <CodeImport
-  file="../../examples/quickstart/counter-contract/src/main.sw"
+  file="/fuel quickstart/counter-contract/src/main.sw"
   comment="counter-contract"
   commentType="//"
   lang="sway"
@@ -261,12 +261,12 @@ File: `./counter-contract/src/main.sw`
 id="entire-contract"
 action={{
   name: 'compareToFile',
-  filepath: 'guides-testing/fuel-project/counter-contract/src/main.sw'
+  filepath: '/fuel quickstart/counter-contract/src/main.sw'
 }}
 />
 
 <CodeImport
-  file="../../examples/quickstart/counter-contract/src/main.sw"
+  file="/fuel quickstart/counter-contract/src/main.sw"
   comment="all"
   commentType="/*"
   lang="sway"
@@ -421,13 +421,13 @@ At the bottom of `test/harness.rs` below the `can_get_contract_id()` test, add t
 id="test-harness"
 action={{
   name: 'modifyFile',
-  filepath: 'guides-testing/fuel-project/counter-contract/tests/harness.rs',
+  filepath: '/fuel quickstart/counter-contract/tests/harness.rs',
   addSpacesBefore: 1,
 }}
 />
 
 <CodeImport
-  file="../../examples/quickstart/counter-contract/tests/harness.rs"
+  file="/fuel quickstart/counter-contract/tests/harness.rs"
   comment="contract-test"
   commentType="//"
   lang="rust"
@@ -441,12 +441,12 @@ File: `./counter-contract/tests/harness.rs`
 id="final-test-harness"
 action={{
   name: 'compareToFile',
-  filepath: 'guides-testing/fuel-project/counter-contract/tests/harness.rs'
+  filepath: '/fuel quickstart/counter-contract/tests/harness.rs'
 }}
 />
 
 <CodeImport
-  file="../../examples/quickstart/counter-contract/tests/harness.rs"
+  file="/fuel quickstart/counter-contract/tests/harness.rs"
   comment="contract-test-all"
   commentType="/*"
   lang="rust"
