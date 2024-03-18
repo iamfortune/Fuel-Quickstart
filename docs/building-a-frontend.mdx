@@ -353,6 +353,100 @@ Once connected, you should see the counter value and increment button:
 </Box.Centered>
 </ConditionalContent>
 
+{/* Adding new features to the application */}
+## Adding new features 
+You can extend the current contract to include more featres to enhance our smart contract. Below, we will include a decrement, multiply and reset features to our contract.
+
+### Decrement the Counter
+
+You  can decrease the counter value by clicking the "Decrement Counter" button. This sends a transaction to the smart contract to decrement the counter by 1.
+
+<TestAction
+id="app-code"
+action={{
+  name: 'writeToFile',
+  filepath: '/frontend/src/App.tsx',
+}}
+/>
+
+<ConditionalContent versionSet={props.versionSet} showForVersions={['default', 'nightly']}>
+<CodeImport
+  file="/frontend/src/App.tsx"
+  lang="tsx"
+  lineStart="77"
+  lineEnd="95"
+/>
+</ConditionalContent>
+
+<ConditionalContent versionSet={props.versionSet} showForVersions={['beta-4']}>
+<CodeImport
+  file="/frontend/src/App.tsx"
+  lang="tsx"
+/>
+</ConditionalContent>
+
+### Multiply the Counter
+
+To multiply the counter value, you enter a multiplier in the input field and click the "Multiply Counter" button. This sends a transaction to multiply the current counter value by the specified multiplier.
+
+<ConditionalContent versionSet={props.versionSet} showForVersions={['default', 'nightly']}>
+<CodeImport
+  file="/frontend/src/App.tsx"
+  lang="tsx"
+  lineStart="97"
+  lineEnd="117"
+/>
+</ConditionalContent>
+
+<ConditionalContent versionSet={props.versionSet} showForVersions={['beta-4']}>
+<CodeImport
+  file="/frontend/src/App.tsx"
+  lang="tsx"
+/>
+</ConditionalContent>
+
+### Reset the Counter
+
+The "Reset Counter" button sets the counter back to 0. This feature allows you to start over without manually decrementing or incrementing the counter to reach the default value of 0.
+
+<ConditionalContent versionSet={props.versionSet} showForVersions={['default', 'nightly']}>
+<CodeImport
+  file="/frontend/src/App.tsx"
+  lang="tsx"
+  lineStart="97"
+  lineEnd="117"
+/>
+</ConditionalContent>
+
+<ConditionalContent versionSet={props.versionSet} showForVersions={['beta-4']}>
+<CodeImport
+  file="/frontend/src/App.tsx"
+  lang="tsx"
+/>
+</ConditionalContent>
+
+### Disconnecting the Wallet
+
+Finally, You can disconnect your wallet by clicking the "Disconnect Wallet" button. This is useful for security purposes and when switching between different wallet accounts.
+
+<ConditionalContent versionSet={props.versionSet} showForVersions={['default', 'nightly']}>
+<CodeImport
+  file="/frontend/src/App.tsx"
+  lang="tsx"
+  lineStart="119"
+  lineEnd="137"
+/>
+</ConditionalContent>
+
+<ConditionalContent versionSet={props.versionSet} showForVersions={['beta-4']}>
+<CodeImport
+  file="/frontend/src/App.tsx"
+  lang="tsx"
+/>
+</ConditionalContent>
+
+There you have it! We just added more features to our smartcontract.
+
 ## You just built a fullstack dapp on Fuel! ⛽
 
 <ConditionalContent versionSet={props.versionSet} showForVersions={['default', 'nightly']}>

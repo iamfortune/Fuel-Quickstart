@@ -207,7 +207,7 @@ export default function Home() {
               style={styles.button}
               disabled={isTransactionProcessing}
             >
-              Disconnect wallet
+              Disconnect Wallet
             </button>
           </>
         ) : (
