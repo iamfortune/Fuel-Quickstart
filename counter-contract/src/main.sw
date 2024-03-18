@@ -13,15 +13,14 @@ abi Counter {
  
     #[storage(read, write)] 
     fn decrement(); 
-    
+
     #[storage(read, write)]
     fn multiply(by: u64);
 
     #[storage(read, write)]
-    fn reset(to: u64); 
+    fn reset(); 
 
 }
-
 
 
 
@@ -56,8 +55,8 @@ impl Counter for Contract {
 
 
     #[storage(read, write)]
-    fn reset(to: u64) {
-        storage.counter.write(to);
+    fn reset() {
+        storage.counter.write(0);
     }
 
 }

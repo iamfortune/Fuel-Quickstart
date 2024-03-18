@@ -57,3 +57,56 @@ async fn can_get_contract_id() {
 
     // Now you have an instance of your contract you can use to test each function
 }
+
+#[tokio::test]
+async fn test_decrement() {
+    let (instance, _id) = get_contract_instance().await;
+
+    // First, increment the counter to ensure it's above 0
+    instance.methods().increment().call().await.unwrap();
+
+    // Then, decrement the counter
+    instance.methods().decrement().call().await.unwrap();
+
+    // Get the current value of the counter
+    let result = instance.methods().count().call().await.unwrap();
+
+    // Check that the current value of the counter is back to 0.
+    assert_eq!(result.value, 0);
+}
+
+#[tokio::test]
+async fn test_multiply() {
+    let (instance, _id) = get_contract_instance().await;
+
+    // Increment the counter to 1 for multiplication
+    instance.methods().increment().call().await.unwrap();
+
+    // Multiply the counter by 5
+    instance.methods().multiply(5).call().await.unwrap();
+
+    // Get the current value of the counter
+    let result = instance.methods().count().call().await.unwrap();
+
+    // Check that the current value of the counter is 5 (1 * 5).
+    assert_eq!(result.value, 5);
+}
+
+#[tokio::test]
+async fn test_reset() {
+    let (instance, _id) = get_contract_instance().await;
+
+    // Increment the counter to change its value
+    instance.methods().increment().call().await.unwrap();
+    instance.methods().increment().call().await.unwrap(); // Counter should now be 2
+
+    // Reset the counter to 0
+    instance.methods().reset().call().await.unwrap();
+
+    // Get the current value of the counter
+    let result = instance.methods().count().call().await.unwrap();
+
+    // Check that the current value of the counter is 0.
+    assert_eq!(result.value, 0);
+}
+
