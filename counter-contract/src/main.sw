@@ -13,6 +13,7 @@ abi Counter {
  
     #[storage(read, write)] 
     fn decrement(); 
+    
     #[storage(read, write)]
     fn multiply(by: u64);
 

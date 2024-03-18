@@ -213,16 +213,24 @@ For simplicity, we will define the ABI directly in the contract file itself.
 id="abi"
 action={{
   name: 'modifyFile',
-  filepath: 'guides-testing/fuel-project/counter-contract/src/main.sw'
+  filepath: '/fuel quickstart/counter-contract/src/main.sw'
 }}
 />
 
 <CodeImport
-  file="../../examples/quickstart/counter-contract/src/main.sw"
+  file="/fuel quickstart/counter-contract/src/main.sw"
   comment="abi"
   commentType="//"
   lang="sway"
 />
+
+### Function Definitions 
+
+The Count function reads the current value of the  counter variable from storage and returns it. 
+The Increment function increases the value of the Counter variable by 1, it is a `read` and`write` method and alters the state of the smart contract.
+The Decrement function is a `read` and `write` which decreases the current value of the Counter variable by 1. Similar to the Increment function, it modifies the state of the smart contract.
+The Multiply function takes one arguments called `by` which is the multiplier and returns the product of the current value of the Counter and the multiplier. 
+The Reset function sets the counter back to zero by writing 
 
 ### Implement ABI
 

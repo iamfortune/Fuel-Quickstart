@@ -20,7 +20,7 @@ export default function Home() {
   const [feedbackMessage, setFeedbackMessage] = useState(""); // for the feedback message
   const [isTransactionProcessing, setIsTransactionProcessing] = useState(false); // for transaction processing
   const { connect, setTheme, isConnecting } = useConnectUI();
-  const { disconnect } = useDisconnect();
+  const { disconnect } = useDisconnect(); // To disconnect wallet button 
   const { isConnected } = useIsConnected();
   const { wallet } = useWallet();
 
@@ -74,6 +74,8 @@ export default function Home() {
     }
   };
 
+  /*  FOR THE DECREMENT FUNCTION HANDLER  */
+
   const handleDecrement = async () => {
     if (!contract) {
       return setFeedbackMessage("Contract not loaded");
@@ -93,6 +95,8 @@ export default function Home() {
       setIsTransactionProcessing(false);
     }
   };
+
+    /*  FOR THE MULTIPLY FUNCTION HANDLER  */
 
   const handleMultiply = async () => {
     if (!contract || !multiplyValue) {
@@ -116,6 +120,8 @@ export default function Home() {
     }
   };
 
+    /*  FOR THE RESET FUNCTION HANDLER  */
+
   const handleReset = async () => {
     if (!contract) {
       return setFeedbackMessage("Contract not loaded");
@@ -135,6 +141,8 @@ export default function Home() {
       setIsTransactionProcessing(false);
     }
   };
+
+    /*  FOR THE ADDITIONAL STYLES FOR INPUT FIELDS  */
 
   const updatedStyles = {
     ...styles,
@@ -166,6 +174,8 @@ export default function Home() {
               Increment Counter
             </button>
 
+             {/* DECREMENT BUTTON */}
+
             <button
               onClick={handleDecrement}
               style={styles.button}
@@ -173,6 +183,8 @@ export default function Home() {
             >
               Decrement Counter
             </button>
+
+             {/* MULTIPLY BUTTON */}
 
             <div>
               <input
@@ -190,6 +202,8 @@ export default function Home() {
               </button>
             </div>
 
+              {/* RESET BUTTON */}
+
             <div>
               <button
                 onClick={handleReset}
@@ -199,6 +213,8 @@ export default function Home() {
                 Reset Counter
               </button>
             </div>
+
+            {/* DISCONNECT BUTTON */}
 
             <button
               onClick={() => {
