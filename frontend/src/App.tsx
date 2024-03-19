@@ -14,7 +14,7 @@ const CONTRACT_ID =
   "0xa18fcb73e062ac1929e7081f3c541f3c3f9e397b7eca3be5ca73969e594a7ab8";
 
 export default function Home() {
-  const [contract, setContract] = useState<CounterContractAbi>();
+  const [contract, setContract] = useState<CounterContractAbi | any>();
   const [counter, setCounter] = useState<number>(); // State to hold the general value
   const [multiplyValue, setMultiplyValue] = useState<number>(1); // State to hold the multiply value
   const [feedbackMessage, setFeedbackMessage] = useState(""); // for the feedback message
@@ -26,6 +26,13 @@ export default function Home() {
   const { wallet } = useWallet();
 
   setTheme("dark");
+
+
+  useEffect(() => {
+    setTimeout(() => {
+      setFeedbackMessage("");
+    }, 5000);
+  }, [feedbackMessage]);
 
   useEffect(() => {
     async function getInitialCount() {
@@ -40,6 +47,7 @@ export default function Home() {
     }
     getInitialCount();
   }, [isConnected, wallet]);
+
 
   const getCount = async (counterContract: CounterContractAbi) => {
     try {
@@ -56,104 +64,81 @@ export default function Home() {
     }
   };
 
-  const onIncrementPressed = async () => {
+  const executeContractFunction = async (
+    action: (value?: any) => Promise<any>,
+    successMessage: string,
+    errorMessage: string
+  ) => {
     if (!contract) {
       setSuccess(false);
       return setFeedbackMessage("Contract not loaded");
     }
+    
     try {
       setIsTransactionProcessing(true);
-      await contract.functions
-        .increment()
-        .txParams({ gasPrice: 1, gasLimit: 100_000 })
-        .call();
-      await getCount(contract);
-      setSuccess(true);
-      setFeedbackMessage("Counter incremented successfully!");
-    } catch (error) {
-      setSuccess(false);
-      setFeedbackMessage("Increment operation failed.");
-    } finally {
-      setIsTransactionProcessing(false);
-    }
-  };
+  
+      //argument !== undefined ? await action(argument) : await action(); 
 
-  /*  FOR THE DECREMENT FUNCTION HANDLER  */
-
-  const handleDecrement = async () => {
-    if (!contract) {
-      setSuccess(false);
-      return setFeedbackMessage("Contract not loaded");
-    }
-    try {
-      setIsTransactionProcessing(true);
-      await contract.functions
-        .decrement()
-        .txParams({ gasPrice: 1, gasLimit: 100_000 })
-        .call();
-      await getCount(contract);
+      await action();
+  
+      await getCount(contract); // Refresh the counter display
       setSuccess(true);
-      setFeedbackMessage("Counter decremented successfully!");
+      setFeedbackMessage(successMessage);
     } catch (error) {
+      console.error(error);
       setSuccess(false);
-      let errorMessage = "Counter cannot be decremented below 0.";
       setFeedbackMessage(errorMessage);
     } finally {
       setIsTransactionProcessing(false);
     }
   };
 
-    /*  FOR THE MULTIPLY FUNCTION HANDLER  */
+  
+  const onIncrementPressed = () => {
+    executeContractFunction(
+      () => contract?.functions.increment().txParams({ gasPrice: 1, gasLimit: 100_000 }).call(),
+      "Counter incremented successfully!",
+      "Increment operation failed."
+    );
+  };
+  
+  /*  FOR THE DECREMENT FUNCTION HANDLER  */
+  const handleDecrement = async () => {
+   executeContractFunction(
+    () => contract?.functions.decrement().txParams({ gasPrice: 1, gasLimit: 100_000}).call(),
+    "Counter decremented successfully!",
+    "Counter cannot be decremented below 0."
+   );
+  };
 
+
+  /*  FOR THE RESET FUNCTION HANDLER  */
+  const handleReset = async () => {
+    
+    executeContractFunction(
+      () => contract?.functions.reset().txParams({ gasPrice: 1, gasLimit: 100_000}).call(),
+      "Counter reset successful!",
+      "Counter cannot be decremented below 0."
+    )
+  };
+
+  /*  FOR THE MULTIPLY FUNCTION HANDLER  */
   const handleMultiply = async () => {
-    if (!contract || !multiplyValue) {
+    if (!multiplyValue) {
       setSuccess(false);
       return setFeedbackMessage(
-        "Contract not loaded or multiply value is invalid"
+        "multiply value is invalid"
       );
     }
 
-    try {
-      setIsTransactionProcessing(true);
-      await contract.functions
-        .multiply(multiplyValue)
-        .txParams({ gasPrice: 1, gasLimit: 100_000 })
-        .call();
-      await getCount(contract);
-      setSuccess(true);
-      setFeedbackMessage("Counter multiplied successfully!");
-    } catch (error) {
-      setSuccess(false)
-      setFeedbackMessage("Increment operation failed.");
-    } finally {
-      setIsTransactionProcessing(false);
-    }
+    executeContractFunction(
+      () => contract.functions.multiply(multiplyValue).txParams({ gasPrice: 1, gasLimit: 100_000 }).call(),
+      "Counter multiplied successfully!",
+      "multiply operation failed."
+
+    );
   };
-
-    /*  FOR THE RESET FUNCTION HANDLER  */
-
-  const handleReset = async () => {
-    if (!contract) {
-      setSuccess(false)
-      return setFeedbackMessage("Contract not loaded");
-    }
-
-    try {
-      setIsTransactionProcessing(true);
-      await contract.functions
-        .reset()
-        .txParams({ gasPrice: 1, gasLimit: 100_000 })
-        .call();
-      await getCount(contract);
-      setSuccess(true);
-      setFeedbackMessage("Counter reset successful!");
-    } catch (error) {
-      setSuccess(false)
-      setFeedbackMessage("Increment operation failed.");
-    } finally {
-      setIsTransactionProcessing(false);
-    }
-  };
+  
 
     /*  FOR THE ADDITIONAL STYLES FOR INPUT FIELDS  */
 
