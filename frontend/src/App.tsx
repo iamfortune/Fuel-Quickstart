@@ -18,7 +18,7 @@ export default function Home() {
   const [counter, setCounter] = useState<number>(); // State to hold the general value
   const [multiplyValue, setMultiplyValue] = useState<number>(1); // State to hold the multiply value
   const [feedbackMessage, setFeedbackMessage] = useState(""); // for the feedback message
-  const [success, setSuccess] = useState(true);
+  const [success, setSuccess] = useState(true); // success message 
   const [isTransactionProcessing, setIsTransactionProcessing] = useState(false); // for transaction processing
   const { connect, setTheme, isConnecting } = useConnectUI();
   const { disconnect } = useDisconnect(); // To disconnect wallet button 
@@ -76,8 +76,6 @@ export default function Home() {
     
     try {
       setIsTransactionProcessing(true);
-  
-      //argument !== undefined ? await action(argument) : await action(); 
 
       await action();
   
